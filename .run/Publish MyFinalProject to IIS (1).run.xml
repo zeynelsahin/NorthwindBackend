@@ -1,0 +1,6 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Publish MyFinalProject to IIS (1)" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
+    <riderPublish configuration="Release" platform="Any CPU" publish_profile="&lt;no publish profile&gt;" uuid_high="-3695263946518934982" uuid_low="-5811132231867282316" />
+    <method v="2" />
+  </configuration>
+</component>

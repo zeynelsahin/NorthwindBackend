@@ -1,0 +1,13 @@
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\bin\Release\netstandard2.1\Entities.deps.json
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\bin\Release\netstandard2.1\Entities.dll
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\bin\Release\netstandard2.1\Entities.pdb
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\bin\Release\netstandard2.1\Core.dll
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\bin\Release\netstandard2.1\Core.pdb
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\obj\Release\netstandard2.1\Entities.csproj.AssemblyReference.cache
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\obj\Release\netstandard2.1\Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\obj\Release\netstandard2.1\Entities.AssemblyInfoInputs.cache
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\obj\Release\netstandard2.1\Entities.AssemblyInfo.cs
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\obj\Release\netstandard2.1\Entities.csproj.CoreCompileInputs.cache
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\obj\Release\netstandard2.1\Entities.csproj.CopyComplete
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\obj\Release\netstandard2.1\Entities.dll
+C:\Users\zynls\Masaüstü\MyFinalProject\Entities\obj\Release\netstandard2.1\Entities.pdb

@@ -1,0 +1,10 @@
+C:\Users\zynls\Masaüstü\MyFinalProject\Core\bin\Release\netstandard2.1\Core.deps.json
+C:\Users\zynls\Masaüstü\MyFinalProject\Core\bin\Release\netstandard2.1\Core.dll
+C:\Users\zynls\Masaüstü\MyFinalProject\Core\bin\Release\netstandard2.1\Core.pdb
+C:\Users\zynls\Masaüstü\MyFinalProject\Core\obj\Release\netstandard2.1\Core.csproj.AssemblyReference.cache
+C:\Users\zynls\Masaüstü\MyFinalProject\Core\obj\Release\netstandard2.1\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zynls\Masaüstü\MyFinalProject\Core\obj\Release\netstandard2.1\Core.AssemblyInfoInputs.cache
+C:\Users\zynls\Masaüstü\MyFinalProject\Core\obj\Release\netstandard2.1\Core.AssemblyInfo.cs
+C:\Users\zynls\Masaüstü\MyFinalProject\Core\obj\Release\netstandard2.1\Core.csproj.CoreCompileInputs.cache
+C:\Users\zynls\Masaüstü\MyFinalProject\Core\obj\Release\netstandard2.1\Core.dll
+C:\Users\zynls\Masaüstü\MyFinalProject\Core\obj\Release\netstandard2.1\Core.pdb
