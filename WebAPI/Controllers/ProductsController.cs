@@ -16,7 +16,7 @@ public class ProductsController : ControllerBase
     {
         _productService = productService;
     }
-
+    [NonAction]
     public IActionResult Dondur(IResult result)
     {
         if (result.Success) return Ok(result);
