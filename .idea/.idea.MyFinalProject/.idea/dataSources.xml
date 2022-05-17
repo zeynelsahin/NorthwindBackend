@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:jtds:sqlserver://Zeynel;instance=MSSQLSERVER</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="u0642966_Deneme@94.73.170.5" uuid="50ea4102-043e-4dd6-b4e4-008afd6b9f84">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://94.73.170.5;database=u0642966_Deneme</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

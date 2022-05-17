@@ -20,6 +20,7 @@ namespace Business.Concrete
     {
         private readonly IProductDal _productDal;
         private readonly ICategoryService _categoryService;
+
         public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
             _productDal = productDal;
@@ -29,15 +30,13 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
-           
-            if (DateTime.Now.Hour == 22) return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
-
+            // if (DateTime.Now.Hour == 22) return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
         }
 
-        public IDataResult<List<Product>> GetAllByCategory(int id)
+        public IDataResult<List<Product>> GetAllByCategory(int categoryId)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == categoryId));
         }
 
         public IDataResult<List<Product>> GetByUnitPrice(decimal min, decimal max)
@@ -49,36 +48,37 @@ namespace Business.Concrete
         {
             return new ErrorDataResult<List<ProductDetailDto>>(new List<ProductDetailDto>(), Messages.ErrorProductsListed);
         }
+
         [CacheAspect]
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
         }
-        
-        //[SecuredOperation("product.add")]
+
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
-        public IResult Add(Product product)
+        public List<IResult> Add(Product product)
         {
-            IResult result = BusinessRules.Run(CheckIfProductNameExists(product.ProductName), CheckIfProductOfCategoryCorrect(product.CategoryId),CheckIfCategoryLimitExceded());
-            
+            var result = BusinessRules.RunMultiple(CheckIfEmployeeExistsForCategory(product.CategoryId), CheckIfProductNameExists(product.ProductName),CheckIfProductOfCategoryCorrect(product.CategoryId), CheckIfCategoryLimitExceded());
+
             if (result != null)
             {
                 return result;
             }
 
             _productDal.Add(product);
-            return new SuccesResult(Messages.ProductAdded);
+            return new List<IResult> { new SuccesResult(Messages.ProductAdded) };
         }
 
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult UpdateProduct(Product product)
         {
-            return new SuccesResult("Ürün güncellendi");
+            return new SuccesResult(Messages.ProductUpdated);
         }
 
-        
+
         [TransactionScopeAspect]
         public IResult AddTransactionalTest(Product product)
         {
@@ -106,10 +106,20 @@ namespace Business.Concrete
 
             return new SuccesResult();
         }
+        private IResult CheckIfEmployeeExistsForCategory(int categoryId)
+        {
+            var result = _categoryService.GetById(categoryId);
+            if (result.Data==null)
+            {
+                return new ErrorResult(Messages.CategoryNotFound);
+            }
+
+            return new SuccesResult();
+        }
         private IResult CheckIfCategoryLimitExceded()
         {
             var result = _categoryService.GetAll().Data.Count;
-            if (result>15)
+            if (result > 15)
             {
                 return new ErrorResult(Messages.CategoryLimitExceded);
             }

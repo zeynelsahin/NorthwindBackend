@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Extensions
 {
@@ -49,6 +50,16 @@ namespace Core.Extensions
                     Errors=errors
                 }.ToString());
             }
+            else if (e.GetType()==typeof(AuthorizedException))
+            {
+                return httpContext.Response.WriteAsync(new ErrorDetails
+                {
+                    StatusCode = httpContext.Response.StatusCode,
+                    Message = e.Message
+                }.ToString());
+            }
+          
+           
 
             return httpContext.Response.WriteAsync(new ErrorDetails
             {

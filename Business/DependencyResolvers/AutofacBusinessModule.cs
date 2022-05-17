@@ -17,14 +17,30 @@ namespace Business.DependencyResolvers
     {
         protected override void Load(ContainerBuilder builder)
         {
+            //Product
             builder.RegisterType<ProductManager>().As<IProductService>();
             builder.RegisterType<EfProductDal>().As<IProductDal>();
+            //Category
             builder.RegisterType<CategoryManager>().As<ICategoryService>();
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>();
+            //User
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
+            //Auth
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+            //Customer
+            builder.RegisterType<EfCustomerDal>().As<ICustomerDal>();
+            builder.RegisterType<CustomerManager>().As<ICustomerService>();
+            //Employee
+            builder.RegisterType<EfEmployeeDal>().As<IEmployeeDal>();
+            builder.RegisterType<EmployeeManager>().As<IEmployeeService>();
+            //OperationClaim
+            builder.RegisterType<EfOperationClaim>().As<IOperationClaimDal>();
+            builder.RegisterType<OperationClaimManager>().As<IOperationClaimService>();
+            //UserOperationClaim
+            builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>();
+            builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>();
 
             var assembly = Assembly.GetExecutingAssembly();
 

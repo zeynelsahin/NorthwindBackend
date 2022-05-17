@@ -10,16 +10,15 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Business.BusinessAspects.Autofac
 {
     //JWT
-    public class SecuredOperation:MethodInterception
+    public class SecuredOperation : MethodInterception
     {
-        private string[] _roles;
-        private IHttpContextAccessor _httpContextAccessor;
+        private readonly string[] _roles;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public SecuredOperation(string roles)
         {
             _roles = roles.Split(',');
-            _httpContextAccessor =  ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
-
+            _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
         }
 
         protected override void OnBefore(IInvocation invocation)
@@ -32,9 +31,8 @@ namespace Business.BusinessAspects.Autofac
                     return;
                 }
             }
-            throw new Exception(Messages.AuthorizationDenied);
+
+            throw new AuthorizedException(Messages.AuthorizationDenied);
         }
     }
-
- 
 }

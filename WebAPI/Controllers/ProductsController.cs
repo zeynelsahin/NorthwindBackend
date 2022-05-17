@@ -22,6 +22,12 @@ public class ProductsController : ControllerBase
         if (result.Success) return Ok(result);
         return BadRequest(result);
     }
+    [NonAction]
+    public IActionResult Dondur(List<IResult> result)
+    {
+        if (result[0].Success) return Ok(result);
+        return BadRequest(result);
+    }
 
     [HttpGet("getall")]
     public IActionResult GetAll()
@@ -44,14 +50,14 @@ public class ProductsController : ControllerBase
         return Dondur(result);
     }
 
-    [HttpGet("getallbycategory")]
+    [HttpGet("getAllByCategory")]
     public IActionResult GetAllByCategory(int id)
     {
         var result = _productService.GetAllByCategory(id);
         return Dondur(result);
     }
 
-    [HttpGet("getbyunitprice")]
+    [HttpGet("getByUnitprice")]
     public IActionResult GetByUnitPrice(decimal min, decimal max)
     {
         var result = _productService.GetByUnitPrice(min, max);
@@ -59,7 +65,7 @@ public class ProductsController : ControllerBase
     }
 
 
-    [HttpGet("getproductsdetails")]
+    [HttpGet("getProductsDetails")]
     public IActionResult GetProductsDetails()
     {
         var result = _productService.GetProductDetails();
