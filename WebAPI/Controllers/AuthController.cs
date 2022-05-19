@@ -19,16 +19,10 @@ public class AuthController : Controller
     public ActionResult Login(UserForLoginDto userForLoginDto)
     {
         var userToLogin = _authService.Login(userForLoginDto);
-        if (!userToLogin.Success)
-        {
-            return BadRequest(userToLogin.Message);
-        }
+        if (!userToLogin.Success) return BadRequest(userToLogin.Message);
 
         var result = _authService.CreateAccessToken(userToLogin.Data);
-        if (result.Success)
-        {
-            return Ok(result);
-        }
+        if (result.Success) return Ok(result);
 
         return BadRequest(result.Message);
     }
@@ -37,17 +31,11 @@ public class AuthController : Controller
     public ActionResult Register(UserForRegisterDto userForRegisterDto)
     {
         var userExists = _authService.UserExists(userForRegisterDto.Email);
-        if (!userExists.Success)
-        {
-            return BadRequest(userExists.Message);
-        }
+        if (!userExists.Success) return BadRequest(userExists.Message);
 
         var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
         var result = _authService.CreateAccessToken(registerResult.Data);
-        if (result.Success)
-        {
-            return Ok(result.Data);
-        }
+        if (result.Success) return Ok(result.Data);
 
         return BadRequest(result.Message);
     }

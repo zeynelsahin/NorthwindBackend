@@ -1,6 +1,6 @@
 ﻿namespace Core.Entities.Concete
 {
-    public class UserOperationClaim: IEntity
+    public class UserOperationClaim : IEntity
     {
         public int Id { get; set; }
         public int UserId { get; set; }

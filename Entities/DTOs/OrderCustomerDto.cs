@@ -8,6 +8,5 @@ namespace Entities.DTOs
     {
         public Order Order { get; set; }
         public Customer Customer { get; set; }
-    
     }
 }

@@ -7,9 +7,9 @@ using Entities.DTOs;
 
 namespace DataAccess.Abstract
 {
-    public interface IOrderDal:IEntityRepository<Order>
+    public interface IOrderDal : IEntityRepository<Order>
     {
-         List<OrderCustomerDto> GetOrderCustomer();
+        List<OrderCustomerDto> GetOrderCustomer();
         List<OrderEmployeeDto> GetOrderEmployee();
     }
 }

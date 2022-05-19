@@ -2,6 +2,7 @@
 using System.Linq;
 using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Caching;
 using Core.Entities.Concete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -21,6 +22,7 @@ namespace Business.Concrete
             _userService = userService;
         }
 
+        [CacheAspect]
         public IDataResult<List<UserOperationClaim>> GetAll()
         {
             return new SuccessDataResult<List<UserOperationClaim>>(_userOperationClaimDal.GetAll(), Messages.UserOperationClaimsListed);
@@ -40,19 +42,22 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<UserOperationClaim>(_userOperationClaimDal.Get(claim => claim.OperationClaimId == operationClaimId));
         }
-        
+
+        [CacheRemoveAspect("IUserOperationClaimService.Get")]
         public List<IResult> Add(UserOperationClaim userOperationClaim)
         {
             _userOperationClaimDal.Add(userOperationClaim);
             return new List<IResult>() { new SuccessResult(Messages.UserOperationClaimAdded) };
         }
 
+        [CacheRemoveAspect("IUserOperationClaimService.Get")]
         public IResult Update(UserOperationClaim userOperationClaim)
         {
             _userOperationClaimDal.Update(userOperationClaim);
             return new SuccessResult(Messages.UserOperationClaimUpdated);
         }
 
+        [CacheRemoveAspect("IUserOperationClaimService.Get")]
         public IResult Delete(int operationClaimId)
         {
             var entity = _userOperationClaimDal.Get(claim => claim.OperationClaimId == operationClaimId);
@@ -63,10 +68,7 @@ namespace Business.Concrete
         private IResult CheckIfOperationClaimExist(int operationClaimId)
         {
             var result = _operationClaimService.GetById(operationClaimId);
-            if (result.Data==null)
-            {
-                return new ErrorResult(Messages.OperaClaimNotFound);
-            }
+            if (result.Data == null) return new ErrorResult(Messages.OperaClaimNotFound);
 
             return new SuccessResult();
         }

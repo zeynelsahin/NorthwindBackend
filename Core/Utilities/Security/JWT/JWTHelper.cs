@@ -42,8 +42,8 @@ public class JwtHelper : ITokenHelper
         SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
     {
         var jwt = new JwtSecurityToken(
-            issuer: tokenOptions.Issuer,
-            audience: tokenOptions.Audience,
+            tokenOptions.Issuer,
+            tokenOptions.Audience,
             expires: _accessTokenExpiration,
             notBefore: DateTime.Now,
             claims: SetClaims(user, operationClaims),

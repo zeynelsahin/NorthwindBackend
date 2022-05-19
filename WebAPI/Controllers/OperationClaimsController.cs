@@ -10,11 +10,12 @@ namespace WebAPI.Controllers;
 public class OperationClaimsController : Controller
 {
     private IOperationClaimService _operationClaimService;
-    
+
     public OperationClaimsController(IOperationClaimService operationClaimService)
     {
         _operationClaimService = operationClaimService;
     }
+
     [NonAction]
     public IActionResult Dondur(IResult result)
     {

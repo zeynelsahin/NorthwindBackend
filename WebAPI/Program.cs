@@ -22,7 +22,7 @@ var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOpt
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.TokenValidationParameters=new TokenValidationParameters
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
@@ -34,7 +34,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddDependecyResolvers(new ICoreModule[]{new CoreModule()});
+builder.Services.AddDependecyResolvers(new ICoreModule[] { new CoreModule() });
 // builder.Services.AddSingleton<IProductService, ProductManager>();
 // builder.Services.AddSingleton<IProductDal, EfProductDal>();
 

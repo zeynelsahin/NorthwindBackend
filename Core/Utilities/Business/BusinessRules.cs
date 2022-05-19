@@ -11,12 +11,8 @@ namespace Core.Utilities.Business
         {
             var result = new SuccessResult();
             foreach (var logic in logics)
-            {
                 if (!logic.Success)
-                {
                     return logic;
-                }
-            }
 
             return result;
         }
@@ -25,12 +21,8 @@ namespace Core.Utilities.Business
         {
             var resultList = new List<IResult>();
             foreach (var logic in logics)
-            {
                 if (!logic.Success)
-                {
                     resultList.Add(logic);
-                }
-            }
 
             return resultList;
         }

@@ -11,7 +11,7 @@ namespace Business.Abstract
         IDataResult<List<Customer>> GetAllByCity(string city);
         IDataResult<List<Customer>> GetAllByPostalCode(string postalCode);
         IDataResult<List<Customer>> GetAllByCountry(string country);
-        
+
         IResult Add(Customer customer);
         IResult Update(Customer customer);
         IResult Delete(string customerId);

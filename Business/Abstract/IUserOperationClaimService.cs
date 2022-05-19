@@ -14,7 +14,5 @@ namespace Business.Abstract
         List<IResult> Add(UserOperationClaim userOperationClaim);
         IResult Update(UserOperationClaim userOperationClaim);
         IResult Delete(int operationClaimId);
-        
-        
     }
 }

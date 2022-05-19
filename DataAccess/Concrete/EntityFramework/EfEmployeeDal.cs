@@ -4,8 +4,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfEmployeeDal: EfEntityRepositoryBase<Employee,NorthwindContext>,IEmployeeDal
+    public class EfEmployeeDal : EfEntityRepositoryBase<Employee, NorthwindContext>, IEmployeeDal
     {
-        
     }
 }

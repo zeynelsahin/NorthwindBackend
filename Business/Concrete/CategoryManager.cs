@@ -31,14 +31,10 @@ namespace Business.Concrete
         public IDataResult<Category> GetById(int categoryId)
         {
             var result = BusinessRules.Run(CheckIfCategoryExistsDataResult(categoryId));
-            if (result.Success != true)
-            {
-                return (IDataResult<Category>)result;
-            }
+            if (result.Success != true) return (IDataResult<Category>)result;
 
             var category = _categoryDal.Get(category => category.CategoryId == categoryId);
             return new SuccessDataResult<Category>(category, Messages.CategoryListed);
-            
         }
 
         [ValidationAspect(typeof(CategoryValidator))]
@@ -54,10 +50,7 @@ namespace Business.Concrete
         public IResult Update(Category category)
         {
             var result = BusinessRules.Run(CheckIfCategoryExists(category.CategoryId));
-            if (result.Success != true)
-            {
-                return result;
-            }
+            if (result.Success != true) return result;
 
             _categoryDal.Update(category);
             return new SuccessResult(Messages.CategoryUpdated);
@@ -67,10 +60,7 @@ namespace Business.Concrete
         public IResult Delete(int categoryId)
         {
             var result = BusinessRules.Run(CheckIfCategoryExists(categoryId));
-            if (result.Success != true)
-            {
-                return result;
-            }
+            if (result.Success != true) return result;
 
             var entity = GetById(categoryId);
             _categoryDal.Delete(entity.Data);
@@ -80,10 +70,7 @@ namespace Business.Concrete
         private IResult CheckIfCategoryExists(int? categoryId)
         {
             var result = _categoryDal.GetAll(category => category.CategoryId == categoryId).Any();
-            if (!result)
-            {
-                return new ErrorResult(Messages.CategoryNotFound);
-            }
+            if (!result) return new ErrorResult(Messages.CategoryNotFound);
 
             return new SuccessResult();
         }
@@ -91,10 +78,7 @@ namespace Business.Concrete
         private IDataResult<Category> CheckIfCategoryExistsDataResult(int? categoryId)
         {
             var result = _categoryDal.GetAll(category => category.CategoryId == categoryId).Any();
-            if (!result)
-            {
-                return new ErrorDataResult<Category>(Messages.CategoryNotFound);
-            }
+            if (!result) return new ErrorDataResult<Category>(Messages.CategoryNotFound);
 
             return new SuccessDataResult<Category>();
         }

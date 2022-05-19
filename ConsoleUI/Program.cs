@@ -10,7 +10,7 @@ using Entities.Concrete;
 //ProductTest1(int.MaxValue, string.Empty);
 
 
-var productManager = new ProductManager(new EfProductDal(),new CategoryManager(new EfCategoryDal()));
+var productManager = new ProductManager(new EfProductDal(), new CategoryManager(new EfCategoryDal()));
 
 
 var product = new Product { ProductId = 88, UnitPrice = 25, CategoryId = 2, ProductName = "Su Bardagı", UnitsInStock = 25 };
@@ -41,12 +41,12 @@ void CategoryTest()
 
 void ProductTest()
 {
-    var productManager = new ProductManager(new EfProductDal(),new CategoryManager(new EfCategoryDal()));
+    var productManager = new ProductManager(new EfProductDal(), new CategoryManager(new EfCategoryDal()));
     foreach (var product in productManager.GetAllByCategory(2).Data) Console.WriteLine(product.ProductName);
 }
 
 void ProductTest1(int deneme, string dasd)
 {
-    var productManager = new ProductManager(new EfProductDal(),new CategoryManager(new EfCategoryDal()));
+    var productManager = new ProductManager(new EfProductDal(), new CategoryManager(new EfCategoryDal()));
     foreach (var product in productManager.GetProductCategory().Data) Console.WriteLine($"Product Name : {product.ProductName} Category Name: {product.CategoryName}");
 }

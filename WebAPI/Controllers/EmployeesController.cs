@@ -3,7 +3,9 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using IResult = Core.Utilities.Results.IResult;
+
 namespace WebAPI.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
 public class EmployeesController : Controller
@@ -21,6 +23,7 @@ public class EmployeesController : Controller
         if (result.Success) return Ok(result);
         return BadRequest(result);
     }
+
     [NonAction]
     private IActionResult Dondur(List<IResult> result)
     {
@@ -34,6 +37,14 @@ public class EmployeesController : Controller
         var result = _employeesService.GetAll();
         return Dondur(result);
     }
+
+    [HttpGet("getById")]
+    public IActionResult GetById(int employeeId)
+    {
+        var result = _employeesService.GetById(employeeId);
+        return Dondur(result);
+    }
+
 
     [HttpGet("getByCity")]
     public IActionResult GetById(string city)

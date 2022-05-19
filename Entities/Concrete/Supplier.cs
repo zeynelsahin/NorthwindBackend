@@ -2,7 +2,7 @@
 
 namespace Entities.Concrete
 {
-    public class Supplier: IEntity
+    public class Supplier : IEntity
     {
         public int SupplierID { get; set; }
         public string CompanyName { get; set; }

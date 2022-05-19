@@ -19,7 +19,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(customer => customer.Phone).MaximumLength(24);
             RuleFor(customer => customer.Fax).MaximumLength(24);
 
-            
+
             //Boş geçilemez
             RuleFor(customer => customer.CompanyName).NotEmpty();
             RuleFor(customer => customer.ContactName).NotEmpty();

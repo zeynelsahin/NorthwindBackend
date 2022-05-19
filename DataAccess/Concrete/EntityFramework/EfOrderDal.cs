@@ -1,7 +1,5 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-
 using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -13,14 +11,14 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public List<OrderCustomerDto> GetOrderCustomer()
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (var context = new NorthwindContext())
             {
                 var result = from order in context.Orders
                     join customer in context.Customers on order.CustomerId equals customer.CustomerID
                     select new OrderCustomerDto()
                     {
-                       Order=order,
-                       Customer = customer
+                        Order = order,
+                        Customer = customer
                     };
                 return result.ToList();
             }
@@ -28,13 +26,13 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<OrderEmployeeDto> GetOrderEmployee()
         {
-            using (NorthwindContext context = new NorthwindContext())
+            using (var context = new NorthwindContext())
             {
                 var result = from order in context.Orders
                     join employee in context.Employees on order.EmployeeId equals employee.EmployeeID
                     select new OrderEmployeeDto()
                     {
-                        Order=order,
+                        Order = order,
                         Employee = employee
                     };
                 return result.ToList();

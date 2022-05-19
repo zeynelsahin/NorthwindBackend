@@ -5,7 +5,8 @@ namespace Entities.DTOs
 {
     public class ProductSuppliersDto
     {
-        public Product Product{ get; set; }
+        public Product Product { get; set; }
+
         public Supplier Supplier { get; set; }
         // public int ProductID { get; set; }
         // public string ProductName { get; set; }

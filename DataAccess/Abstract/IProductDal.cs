@@ -5,7 +5,7 @@ using Entities.DTOs;
 
 namespace DataAccess.Abstract
 {
-    public interface IProductDal:IEntityRepository<Product>
+    public interface IProductDal : IEntityRepository<Product>
     {
         List<ProductCategoryDto> GetProductCategory();
         List<ProductSuppliersDto> GetProductSupplier();

@@ -7,7 +7,7 @@ using Entities.DTOs;
 
 namespace DataAccess.Concrete.InMemory
 {
-    public class InMemoryProductDal:IProductDal
+    public class InMemoryProductDal : IProductDal
     {
         public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
         {

@@ -9,7 +9,6 @@ namespace WebAPI.Controllers;
 [ApiController]
 public class OrdersController : Controller
 {
-    
     private readonly IOrderService _orderService;
 
     public OrdersController(IOrderService orderService)
@@ -58,14 +57,15 @@ public class OrdersController : Controller
         var result = _orderService.GetAllByEmployeeId(employeeId);
         return Dondur(result);
     }
+
     [HttpGet("getAllOrdersCustomers")]
     public IActionResult GetAllOrdersCustomers()
     {
         var result = _orderService.GetOrderCustomer();
         return Dondur(result);
     }
-    [HttpGet("getAllOrdersEmployees")]
 
+    [HttpGet("getAllOrdersEmployees")]
     public IActionResult GetAllOrdersEmployees()
     {
         var result = _orderService.GetOrderEmployee();
@@ -78,18 +78,17 @@ public class OrdersController : Controller
         var result = _orderService.Add(order);
         return Dondur(result);
     }
-    
+
     [HttpPut("update")]
     public void Put(Order order)
     {
         _orderService.Update(order);
     }
-    [HttpPost("delete")]
+
+    [HttpDelete("delete")]
     public IActionResult Add(int orderId)
     {
         var result = _orderService.Delete(orderId);
         return Dondur(result);
     }
-
-    
 }
