@@ -42,7 +42,7 @@ namespace Business.Concrete
         public IResult Add(OperationClaim operationClaim)
         {
             _operationClaimDal.Add(operationClaim);
-            return new SuccesResult(Messages.OperationClaimAdded);
+            return new SuccessResult(Messages.OperationClaimAdded);
         }
 
         [SecuredOperation("admin")]
@@ -50,7 +50,7 @@ namespace Business.Concrete
         public IResult Update(OperationClaim operationClaim)
         {
             _operationClaimDal.Update(operationClaim);
-            return new SuccesResult(Messages.OperaClaimUpdated);
+            return new SuccessResult(Messages.OperaClaimUpdated);
         }
 
         [SecuredOperation("admin")]
@@ -59,7 +59,7 @@ namespace Business.Concrete
         {
             var entity = _operationClaimDal.Get(operationClaim => operationClaim.Id == operationClaimId);
             _operationClaimDal.Delete(entity);
-            return new SuccesResult(Messages.OperationClaimDeleted);
+            return new SuccessResult(Messages.OperationClaimDeleted);
         }
     }
 }

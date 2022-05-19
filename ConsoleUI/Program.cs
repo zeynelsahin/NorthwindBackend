@@ -15,10 +15,10 @@ var productManager = new ProductManager(new EfProductDal(),new CategoryManager(n
 
 var product = new Product { ProductId = 88, UnitPrice = 25, CategoryId = 2, ProductName = "Su Bardagı", UnitsInStock = 25 };
 
-productManager.UpdateProduct(product);
+productManager.Update(product);
 var productGet = productManager.GetById(88);
 Console.WriteLine(productGet.Data.UnitPrice);
-// var result = productManager.GetProductDetails();
+// var result = productManager.GetProductCategory();
 // if (result.Success)
 // {
 //     Console.WriteLine($"Message: {result.Message}");
@@ -48,5 +48,5 @@ void ProductTest()
 void ProductTest1(int deneme, string dasd)
 {
     var productManager = new ProductManager(new EfProductDal(),new CategoryManager(new EfCategoryDal()));
-    foreach (var product in productManager.GetProductDetails().Data) Console.WriteLine($"Product Name : {product.ProductName} Category Name: {product.CategoryName}");
+    foreach (var product in productManager.GetProductCategory().Data) Console.WriteLine($"Product Name : {product.ProductName} Category Name: {product.CategoryName}");
 }

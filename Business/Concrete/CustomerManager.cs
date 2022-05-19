@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
@@ -25,7 +26,12 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<Customer> GetById(string customerId)
         {
-            return new SuccessDataResult<Customer>(_customerDal.Get(customer => customer.CustomerID == customerId));
+            var result = BusinessRules.Run(CheckIfCustomerExists(customerId));
+            if (result.Success!=true)
+            {
+                return (IDataResult<Customer>)result;
+            }
+            return new SuccessDataResult<Customer>(_customerDal.Get(customer => customer.CustomerID == customerId),Messages.CustomerListed);
         }
 
         [CacheAspect]
@@ -43,7 +49,8 @@ namespace Business.Concrete
                 return (IDataResult<List<Customer>>)result;
             }
 
-            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(customer => customer.City == city));
+           
+            return new SuccessDataResult<List<Customer>>( _customerDal.GetAll(customer => customer.City == city),Messages.CustomersListed);
         }
 
         [CacheAspect]
@@ -55,13 +62,18 @@ namespace Business.Concrete
                 return (IDataResult<List<Customer>>)result;
             }
 
-            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(customer => customer.PostalCode == postalCode));
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(customer => customer.PostalCode == postalCode),Messages.CustomersListed);
         }
 
         [CacheAspect]
         public IDataResult<List<Customer>> GetAllByCountry(string country)
         {
-            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(customer => customer.Country == country));
+            var result = BusinessRules.Run(CheckIfCountryExists(country));
+            if (result.Success!=true)
+            {
+                return (IDataResult<List<Customer>>)result;
+            }
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(customer => customer.Country == country),Messages.CustomersListed);
         }
 
 
@@ -70,7 +82,7 @@ namespace Business.Concrete
         public IResult Add(Customer customer)
         {
             _customerDal.Add(customer);
-            return new SuccesResult(Messages.CustomerAdded);
+            return new SuccessResult(Messages.CustomerAdded);
         }
 
         [ValidationAspect(typeof(CustomerValidator))]
@@ -78,7 +90,7 @@ namespace Business.Concrete
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);
-            return new SuccesResult(Messages.CustomerUpdated);
+            return new SuccessResult(Messages.CustomerUpdated);
         }
 
         [CacheRemoveAspect("ICustomerService.Get")]
@@ -86,9 +98,18 @@ namespace Business.Concrete
         {
             var entity = _customerDal.Get(customer => customer.CustomerID == customerId);
             _customerDal.Delete(entity);
-            return new SuccesResult(Messages.CustomerDeleted);
+            return new SuccessResult(Messages.CustomerDeleted);
         }
-        
+        private IDataResult<Customer> CheckIfCustomerExists(string customerId)
+        {
+            var result = _customerDal.GetAll(customer => customer.CustomerID==customerId).Any();
+            if (!result)
+            {
+                return new ErrorDataResult<Customer>(Messages.CustomerNotFound);
+            }
+
+            return new SuccessDataResult<Customer>();
+        }
         private IDataResult<List<Customer>> CheckIfCategoryCityExists(string city)
         {
             var result = _customerDal.GetAll(p => p.City == city).Any();
@@ -102,6 +123,16 @@ namespace Business.Concrete
         private IDataResult<List<Customer>> CheckIfPostalCodeExists(string postalCode)
         {
             var result = _customerDal.GetAll(customer => customer.PostalCode == postalCode).Any();
+            if (!result)
+            {
+                return new ErrorDataResult<List<Customer>>(Messages.CustomerPostalCodeNotFound);
+            }
+
+            return new SuccessDataResult<List<Customer>>();
+        }
+        private IDataResult<List<Customer>> CheckIfCountryExists(string country)
+        {
+            var result = _customerDal.GetAll(customer => customer.Country==country).Any();
             if (!result)
             {
                 return new ErrorDataResult<List<Customer>>(Messages.CustomerPostalCodeNotFound);

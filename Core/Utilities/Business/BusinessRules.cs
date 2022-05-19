@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Core.Entities;
 using Core.Utilities.Results;
 
 namespace Core.Utilities.Business
@@ -7,6 +9,7 @@ namespace Core.Utilities.Business
     {
         public static IResult Run(params IResult[] logics)
         {
+            var result = new SuccessResult();
             foreach (var logic in logics)
             {
                 if (!logic.Success)
@@ -15,11 +18,12 @@ namespace Core.Utilities.Business
                 }
             }
 
-            return new SuccesResult();
+            return result;
         }
+
         public static List<IResult> RunMultiple(params IResult[] logics)
         {
-            List<IResult> resultList= new List<IResult>();
+            var resultList = new List<IResult>();
             foreach (var logic in logics)
             {
                 if (!logic.Success)
@@ -27,12 +31,8 @@ namespace Core.Utilities.Business
                     resultList.Add(logic);
                 }
             }
-            if (resultList.Count>0)
-            {
-                return resultList;
-            }
 
-            return null!;
+            return resultList;
         }
 
         // public static IResult RunMultiple(params IResult[] logics)

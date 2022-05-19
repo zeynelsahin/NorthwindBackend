@@ -1,6 +1,8 @@
-﻿namespace Entities.Concrete
+﻿using Core.Entities;
+
+namespace Entities.Concrete
 {
-    public class Supplier
+    public class Supplier: IEntity
     {
         public int SupplierID { get; set; }
         public string CompanyName { get; set; }

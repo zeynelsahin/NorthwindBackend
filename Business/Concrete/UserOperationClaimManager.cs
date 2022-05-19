@@ -11,14 +11,14 @@ namespace Business.Concrete
     public class UserOperationClaimManager : IUserOperationClaimService
     {
         private readonly IUserOperationClaimDal _userOperationClaimDal;
-        private IOperationClaimDal _operationClaimDal;
-        private IUserDal _userDal;
+        private IOperationClaimService _operationClaimService;
+        private readonly IUserService _userService;
 
-        public UserOperationClaimManager(IUserOperationClaimDal userOperationClaimDal, IOperationClaimDal operationClaimDal, IUserDal userDal)
+        public UserOperationClaimManager(IUserOperationClaimDal userOperationClaimDal, IOperationClaimService operationClaimService, IUserService userService)
         {
             _userOperationClaimDal = userOperationClaimDal;
-            _operationClaimDal = operationClaimDal;
-            _userDal = userDal;
+            _operationClaimService = operationClaimService;
+            _userService = userService;
         }
 
         public IDataResult<List<UserOperationClaim>> GetAll()
@@ -44,42 +44,42 @@ namespace Business.Concrete
         public List<IResult> Add(UserOperationClaim userOperationClaim)
         {
             _userOperationClaimDal.Add(userOperationClaim);
-            return new List<IResult>() { new SuccesResult(Messages.UserOperationClaimAdded) };
+            return new List<IResult>() { new SuccessResult(Messages.UserOperationClaimAdded) };
         }
 
         public IResult Update(UserOperationClaim userOperationClaim)
         {
             _userOperationClaimDal.Update(userOperationClaim);
-            return new SuccesResult(Messages.UserOperationClaimUpdated);
+            return new SuccessResult(Messages.UserOperationClaimUpdated);
         }
 
         public IResult Delete(int operationClaimId)
         {
             var entity = _userOperationClaimDal.Get(claim => claim.OperationClaimId == operationClaimId);
             _userOperationClaimDal.Delete(entity);
-            return new SuccesResult(Messages.UserOperationClaimDeleted);
+            return new SuccessResult(Messages.UserOperationClaimDeleted);
         }
 
         private IResult CheckIfOperationClaimExist(int operationClaimId)
         {
-            var result = _operationClaimDal.GetAll(p => p.Id ==operationClaimId).Any();
-            if (!result)
+            var result = _operationClaimService.GetById(operationClaimId);
+            if (result.Data==null)
             {
                 return new ErrorResult(Messages.OperaClaimNotFound);
             }
 
-            return new SuccesResult();
+            return new SuccessResult();
         }
 
-        private IResult CheckIfUserExist(int userId)
-        {
-            var result = _userDal.GetAll(p => p.Id == userId).Any();
-            if (!result)
-            {
-                return new ErrorResult(Messages.UserNotFound);
-            }
-
-            return new SuccesResult();
-        }
+        // private IResult CheckIfUserExist(int userId)
+        // {
+        //     var result = _userService.(p => p.Id == userId).Any();
+        //     if (!result)
+        //     {
+        //         return new ErrorResult(Messages.UserNotFound);
+        //     }
+        //
+        //     return new SuccesResult();
+        // }
     }
 }

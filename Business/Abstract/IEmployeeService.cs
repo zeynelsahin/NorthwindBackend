@@ -6,6 +6,7 @@ namespace Business.Abstract
 {
     public interface IEmployeeService
     {
+        
         IDataResult<Employee> GetById(int employeeId);
         IDataResult<List<Employee>> GetAll();
         IDataResult<List<Employee>> GetAllByCity(string city);

@@ -36,6 +36,11 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetAllByCategory(int categoryId)
         {
+            var result = BusinessRules.Run(CheckIfCategoryExists(categoryId));
+            if (result.Success!=true)
+            {
+                return (IDataResult<List<Product>>)result;
+            }
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == categoryId));
         }
 
@@ -44,14 +49,26 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max));
         }
 
-        public IDataResult<List<ProductDetailDto>> GetProductDetails()
+        public IDataResult<List<ProductCategoryDto>> GetProductCategory()
         {
-            return new ErrorDataResult<List<ProductDetailDto>>(new List<ProductDetailDto>(), Messages.ErrorProductsListed);
+            return new SuccessDataResult<List<ProductCategoryDto>>(_productDal.GetProductCategory());
+            // return new ErrorDataResult<List<ProductCategoryDto>>(new List<ProductCategoryDto>(), Messages.ErrorProductsListed);
+        }
+
+        public IDataResult<List<ProductSuppliersDto>> GetProductSupplier()
+        {
+            return new SuccessDataResult<List<ProductSuppliersDto>>(_productDal.GetProductSupplier());
         }
 
         [CacheAspect]
         public IDataResult<Product> GetById(int productId)
         {
+            var result = BusinessRules.Run(CheckIfProductExists(productId));
+            if (result.Success != true)
+            {
+                return (IDataResult<Product>)result;
+            }
+
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
         }
 
@@ -60,22 +77,34 @@ namespace Business.Concrete
         [CacheRemoveAspect("IProductService.Get")]
         public List<IResult> Add(Product product)
         {
-            var result = BusinessRules.RunMultiple(CheckIfEmployeeExistsForCategory(product.CategoryId), CheckIfProductNameExists(product.ProductName),CheckIfProductOfCategoryCorrect(product.CategoryId), CheckIfCategoryLimitExceded());
-
-            if (result != null)
+            var result = BusinessRules.RunMultiple(CheckIfCategoryExistsForProduct(product.CategoryId), CheckIfProductNameExists(product.ProductName),
+                CheckIfProductOfCategoryCorrect(product.CategoryId), CheckIfCategoryLimitExceded());
+            if (result.Count > 0)
             {
                 return result;
             }
 
             _productDal.Add(product);
-            return new List<IResult> { new SuccesResult(Messages.ProductAdded) };
+            return new List<IResult> { new SuccessResult(Messages.ProductAdded) };
         }
 
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
-        public IResult UpdateProduct(Product product)
+        public IResult Update(Product product)
         {
-            return new SuccesResult(Messages.ProductUpdated);
+            return new SuccessResult(Messages.ProductUpdated);
+        }
+
+        public IResult Delete(int productId)
+        {
+            var result = BusinessRules.Run(CheckIfProductExists(productId));
+            if (result.Success!=true)
+            {
+                return result;
+            }
+            var entity = GetById(productId);
+            _productDal.Delete(entity.Data);
+            return new SuccessResult(Messages.ProductDeleted);
         }
 
 
@@ -93,7 +122,7 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.ProductCountOfCategoryError);
             }
 
-            return new SuccesResult();
+            return new SuccessResult();
         }
 
         private IResult CheckIfProductNameExists(string productName)
@@ -104,18 +133,20 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.ProductNameAlredyExists);
             }
 
-            return new SuccesResult();
+            return new SuccessResult();
         }
-        private IResult CheckIfEmployeeExistsForCategory(int categoryId)
+
+        private IResult CheckIfCategoryExistsForProduct(int categoryId)
         {
             var result = _categoryService.GetById(categoryId);
-            if (result.Data==null)
+            if (result.Data == null)
             {
                 return new ErrorResult(Messages.CategoryNotFound);
             }
 
-            return new SuccesResult();
+            return new SuccessResult();
         }
+
         private IResult CheckIfCategoryLimitExceded()
         {
             var result = _categoryService.GetAll().Data.Count;
@@ -124,7 +155,28 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.CategoryLimitExceded);
             }
 
-            return new SuccesResult();
+            return new SuccessResult();
+        }
+
+        private IDataResult<Product> CheckIfProductExists(int productId)
+        {
+            var result = _productDal.GetAll(product => product.ProductId == productId).Any();
+            if (!result)
+            {
+                return new ErrorDataResult<Product>(Messages.ProductNotFound);
+            }
+
+            return new SuccessDataResult<Product>();
+        }
+        private IDataResult<List<Product>> CheckIfCategoryExists(int categoryId)
+        {
+            var result = _productDal.GetAll(product => product.CategoryId== categoryId).Any();
+            if (!result)
+            {
+                return new ErrorDataResult<List<Product>>(Messages.CategoryNotFound);
+            }
+
+            return new SuccessDataResult<List<Product>>();
         }
     }
 }

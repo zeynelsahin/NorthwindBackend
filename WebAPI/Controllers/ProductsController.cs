@@ -1,5 +1,4 @@
 using Business.Abstract;
-using Business.BusinessAspects.Autofac;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using IResult = Core.Utilities.Results.IResult;
@@ -16,12 +15,14 @@ public class ProductsController : ControllerBase
     {
         _productService = productService;
     }
+
     [NonAction]
     public IActionResult Dondur(IResult result)
     {
         if (result.Success) return Ok(result);
         return BadRequest(result);
     }
+
     [NonAction]
     public IActionResult Dondur(List<IResult> result)
     {
@@ -29,26 +30,20 @@ public class ProductsController : ControllerBase
         return BadRequest(result);
     }
 
-    [HttpGet("getall")]
+    [HttpGet("getAll")]
     public IActionResult GetAll()
     {
         var result = _productService.GetAll();
         return Dondur(result);
     }
 
-    [HttpGet("getbyid")]
+    [HttpGet("getById")]
     public IActionResult GetById(int id)
     {
         var result = _productService.GetById(id);
         return Dondur(result);
     }
 
-    [HttpPost("add")]
-    public IActionResult Add(Product product)
-    {
-        var result = _productService.Add(product);
-        return Dondur(result);
-    }
 
     [HttpGet("getAllByCategory")]
     public IActionResult GetAllByCategory(int id)
@@ -65,16 +60,37 @@ public class ProductsController : ControllerBase
     }
 
 
-    [HttpGet("getProductsDetails")]
+    [HttpGet("getProductsCategories")]
     public IActionResult GetProductsDetails()
     {
-        var result = _productService.GetProductDetails();
+        var result = _productService.GetProductCategory();
+        return Dondur(result);
+    }
+
+    [HttpGet("getProductsSuppliers")]
+    public IActionResult GetProductsSuppliers()
+    {
+        var result = _productService.GetProductSupplier();
+        return Dondur(result);
+    }
+
+    [HttpPost("add")]
+    public IActionResult Add(Product product)
+    {
+        var result = _productService.Add(product);
         return Dondur(result);
     }
 
     [HttpPut("update")]
     public void Put(Product product)
     {
-        var result = _productService.UpdateProduct(product);
+        _productService.Update(product);
+    }
+
+    [HttpPost("delete")]
+    public IActionResult Add(int productId)
+    {
+        var result = _productService.Delete(productId);
+        return Dondur(result);
     }
 }

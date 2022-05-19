@@ -41,6 +41,9 @@ namespace Business.DependencyResolvers
             //UserOperationClaim
             builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>();
             builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>();
+            //Order
+            builder.RegisterType<EfOrderDal>().As<IOrderDal>();
+            builder.RegisterType<OrderManager>().As<IOrderService>();
 
             var assembly = Assembly.GetExecutingAssembly();
 

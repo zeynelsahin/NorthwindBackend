@@ -31,7 +31,12 @@ namespace DataAccess.Concrete.InMemory
         {
         }
 
-        public List<ProductDetailDto> GetProductDetails()
+        public List<ProductCategoryDto> GetProductCategory()
+        {
+            return null;
+        }
+
+        public List<ProductSuppliersDto> GetProductSupplier()
         {
             return null;
         }
