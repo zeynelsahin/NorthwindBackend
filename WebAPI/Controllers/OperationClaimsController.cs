@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Core.Entities.Concete;
+using Core.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using IResult = Core.Utilities.Results.IResult;
 

@@ -1,4 +1,4 @@
-﻿using Core.Entities.Concete;
+﻿using Core.Entities.Concrete;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 

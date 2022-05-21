@@ -1,4 +1,4 @@
-﻿namespace Core.Entities.Concete
+﻿namespace Core.Entities.Concrete
 {
     public class UserOperationClaim : IEntity
     {

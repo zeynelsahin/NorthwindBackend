@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Core.Entities.Concete;
 using Entities.Concrete;
 
 namespace Business.Constants

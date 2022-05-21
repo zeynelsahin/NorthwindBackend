@@ -3,7 +3,7 @@ using System.Linq;
 using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
-using Core.Entities.Concete;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 
