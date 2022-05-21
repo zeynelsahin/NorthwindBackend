@@ -2,7 +2,7 @@
 
 namespace Core.Extensions
 {
-    public static class ExceptonMiddlewareExtensions
+    public static class ExceptionMiddlewareExtensions
     {
         public static void ConfigureCustomExceptionMiddleware(this IApplicationBuilder app)
         {

@@ -45,11 +45,11 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 app.ConfigureCustomExceptionMiddleware();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsProduction())
+// {
     app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    app.UseSwaggerUI(c=>c.SwaggerEndpoint("/swagger/v1/swagger.json","Northwind API"));
+// }
 
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseHttpsRedirection();

@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Business.Concrete;
+using Core.Extensions;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 
@@ -10,14 +11,18 @@ using Entities.Concrete;
 //ProductTest1(int.MaxValue, string.Empty);
 
 
-var productManager = new ProductManager(new EfProductDal(), new CategoryManager(new EfCategoryDal()));
+// var productManager = new ProductManager(new EfProductDal(), new CategoryManager(new EfCategoryDal()));
+ErrorDetails details = new ErrorDetails();
+details.Message = "asdas";
+details.StatusCode = 600;
 
+Console.WriteLine(details.ToString());
 
-var product = new Product { ProductId = 88, UnitPrice = 25, CategoryId = 2, ProductName = "Su Bardagı", UnitsInStock = 25 };
+// var product = new Product { ProductId = 88, UnitPrice = 25, CategoryId = 2, ProductName = "Su Bardagı", UnitsInStock = 25 };
 
-productManager.Update(product);
-var productGet = productManager.GetById(88);
-Console.WriteLine(productGet.Data.UnitPrice);
+// productManager.Update(product);
+// var productGet = productManager.GetById(88);
+// Console.WriteLine(productGet.Data.UnitPrice);
 // var result = productManager.GetProductCategory();
 // if (result.Success)
 // {
