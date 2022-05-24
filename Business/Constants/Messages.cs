@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Entities.Concrete;
-
-namespace Business.Constants
+﻿namespace Business.Constants
 {
     public static class Messages
     {
@@ -44,7 +41,7 @@ namespace Business.Constants
         public static string EmployeeNotFound = "Çalışan bulunamadı";
         public static string EmployeeNotExistsForReportsTo = "Rapor için girilen çalışan bulunamadı";
 
-        public static string? OperationClaimsListed = "Operasyon talepleri listelendi";
+        public static string OperationClaimsListed = "Operasyon talepleri listelendi";
         public static string OperationClaimAdded = "Operasyon talebi eklendi";
         public static string OperaClaimUpdated = "Operasyon talebi eklendi";
         public static string OperationClaimDeleted = "Operasyon talebi silindi";

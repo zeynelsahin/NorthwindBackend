@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Net;
@@ -46,42 +45,35 @@ namespace Core.Extensions
                 message = e.Message;
                 errors = ((ValidationException)e).Errors;
                 httpContext.Response.StatusCode = 400;
-                return httpContext.Response.WriteAsync(new ValidationErrorDetails()
+                return httpContext.Response.WriteAsync(new ValidationErrorDetails
                 {
                     StatusCode = 400,
                     Message = message,
                     Errors = errors
                 }.ToString());
             }
-            else if (e.GetType() == typeof(AuthorizedException))
-            {
+
+            if (e.GetType() == typeof(AuthorizedException))
                 return httpContext.Response.WriteAsync(new ErrorDetails
                 {
                     StatusCode = httpContext.Response.StatusCode,
                     Message = e.Message
                 }.ToString());
-            }
-            else if (e.GetType() == typeof(SqlNullValueException))
-            {
+            if (e.GetType() == typeof(SqlNullValueException))
                 return httpContext.Response.WriteAsync(new ErrorDetails
                 {
                     Message = "Boş geçilmemisi gereken alan boş geçilmiş"
                 }.ToString());
-            }
-            else if (e.GetType() == typeof(DbUpdateException))
-            {
+            if (e.GetType() == typeof(DbUpdateException))
                 return httpContext.Response.WriteAsync(new ErrorDetails
                 {
                     Message = "Sql server kısıt hatası"
                 }.ToString());
-            }
-            else if (e.GetType() == typeof(SqlException))
-            {
+            if (e.GetType() == typeof(SqlException))
                 return httpContext.Response.WriteAsync(new ErrorDetails
                 {
                     Message = "Sql hatası"
                 }.ToString());
-            }
 
             return httpContext.Response.WriteAsync(new ErrorDetails
             {

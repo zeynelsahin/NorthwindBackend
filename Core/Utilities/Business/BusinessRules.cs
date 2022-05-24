@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Core.Entities;
+﻿using System.Collections.Generic;
 using Core.Utilities.Results;
 
 namespace Core.Utilities.Business

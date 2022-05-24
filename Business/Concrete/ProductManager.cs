@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Business.Abstract;
 using Business.BusinessAspects.Autofac;
@@ -18,8 +17,8 @@ namespace Business.Concrete
 {
     public class ProductManager : IProductService
     {
-        private readonly IProductDal _productDal;
         private readonly ICategoryService _categoryService;
+        private readonly IProductDal _productDal;
 
         public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {

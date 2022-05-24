@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -32,7 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from product in context.Products
                     join supplier in context.Suppliers on product.SupplierId equals supplier.SupplierID
-                    select new ProductSuppliersDto()
+                    select new ProductSuppliersDto
                     {
                         Product = product,
                         Supplier = supplier

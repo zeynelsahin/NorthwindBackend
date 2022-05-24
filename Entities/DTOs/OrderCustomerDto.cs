@@ -1,6 +1,4 @@
-﻿using System;
-using Entities.Concrete;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Entities.Concrete;
 
 namespace Entities.DTOs
 {

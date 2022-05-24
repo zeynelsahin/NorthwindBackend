@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using FluentValidation.Results;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Core.Extensions
 {

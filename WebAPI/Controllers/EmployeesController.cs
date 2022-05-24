@@ -1,7 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
 using IResult = Core.Utilities.Results.IResult;
 
 namespace WebAPI.Controllers;
@@ -10,7 +9,7 @@ namespace WebAPI.Controllers;
 [ApiController]
 public class EmployeesController : Controller
 {
-    private IEmployeeService _employeesService;
+    private readonly IEmployeeService _employeesService;
 
     public EmployeesController(IEmployeeService employeeService)
     {

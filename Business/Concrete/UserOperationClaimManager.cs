@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
@@ -12,8 +11,8 @@ namespace Business.Concrete
     public class UserOperationClaimManager : IUserOperationClaimService
     {
         private readonly IUserOperationClaimDal _userOperationClaimDal;
-        private IOperationClaimService _operationClaimService;
         private readonly IUserService _userService;
+        private readonly IOperationClaimService _operationClaimService;
 
         public UserOperationClaimManager(IUserOperationClaimDal userOperationClaimDal, IOperationClaimService operationClaimService, IUserService userService)
         {
@@ -47,7 +46,7 @@ namespace Business.Concrete
         public List<IResult> Add(UserOperationClaim userOperationClaim)
         {
             _userOperationClaimDal.Add(userOperationClaim);
-            return new List<IResult>() { new SuccessResult(Messages.UserOperationClaimAdded) };
+            return new List<IResult> { new SuccessResult(Messages.UserOperationClaimAdded) };
         }
 
         [CacheRemoveAspect("IUserOperationClaimService.Get")]

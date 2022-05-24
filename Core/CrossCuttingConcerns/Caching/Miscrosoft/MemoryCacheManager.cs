@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Core.Utilities.IOC;
 using Microsoft.Extensions.Caching.Memory;
@@ -10,7 +11,7 @@ namespace Core.CreossCuttingConcerns.Caching.Miscrosoft
 {
     public class MemoryCacheManager : ICacheManager
     {
-        private IMemoryCache _memoryCache;
+        private readonly IMemoryCache _memoryCache;
 
         public MemoryCacheManager()
         {
@@ -49,7 +50,7 @@ namespace Core.CreossCuttingConcerns.Caching.Miscrosoft
 
         public void RemoveByPattern(string pattern)
         {
-            var cacheEntriesCollectionDefinition = typeof(MemoryCache).GetProperty("EntriesCollection", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var cacheEntriesCollectionDefinition = typeof(MemoryCache).GetProperty("EntriesCollection", BindingFlags.NonPublic | BindingFlags.Instance);
             var cacheEntriesCollection = cacheEntriesCollectionDefinition.GetValue(_memoryCache) as dynamic;
             var cacheCollectionValues = new List<ICacheEntry>();
 

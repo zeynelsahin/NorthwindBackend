@@ -1,4 +1,3 @@
-using System.Configuration;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.DependencyResolvers;
@@ -47,8 +46,8 @@ app.ConfigureCustomExceptionMiddleware();
 // Configure the HTTP request pipeline.
 // if (app.Environment.IsProduction())
 // {
-    app.UseSwagger();
-    app.UseSwaggerUI(c=>c.SwaggerEndpoint("/swagger/v1/swagger.json","Northwind API"));
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Northwind API"));
 // }
 
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());

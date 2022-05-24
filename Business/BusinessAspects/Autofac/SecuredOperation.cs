@@ -1,5 +1,4 @@
-﻿using System;
-using Business.Constants;
+﻿using Business.Constants;
 using Castle.DynamicProxy;
 using Core.Extensions;
 using Core.Utilities.Interceptors;
@@ -12,8 +11,8 @@ namespace Business.BusinessAspects.Autofac
     //JWT
     public class SecuredOperation : MethodInterception
     {
-        private readonly string[] _roles;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly string[] _roles;
 
         public SecuredOperation(string roles)
         {

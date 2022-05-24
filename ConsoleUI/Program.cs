@@ -3,7 +3,6 @@
 using Business.Concrete;
 using Core.Extensions;
 using DataAccess.Concrete.EntityFramework;
-using Entities.Concrete;
 
 //GetProductList();
 
@@ -12,7 +11,7 @@ using Entities.Concrete;
 
 
 // var productManager = new ProductManager(new EfProductDal(), new CategoryManager(new EfCategoryDal()));
-ErrorDetails details = new ErrorDetails();
+var details = new ErrorDetails();
 details.Message = "asdas";
 details.StatusCode = 600;
 

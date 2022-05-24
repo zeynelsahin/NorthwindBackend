@@ -4,7 +4,6 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
-using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
@@ -14,7 +13,7 @@ namespace Business.Concrete
 {
     public class OperationClaimManager : IOperationClaimService
     {
-        private IOperationClaimDal _operationClaimDal;
+        private readonly IOperationClaimDal _operationClaimDal;
 
         public OperationClaimManager(IOperationClaimDal operationClaimDal)
         {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
@@ -9,13 +9,12 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System.Linq;
 
 namespace Business.Concrete
 {
     public class CustomerManager : ICustomerService
     {
-        private ICustomerDal _customerDal;
+        private readonly ICustomerDal _customerDal;
 
         public CustomerManager(ICustomerDal customerDal)
         {

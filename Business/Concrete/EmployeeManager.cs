@@ -4,19 +4,17 @@ using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
-using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
-
 namespace Business.Concrete
 {
     public class EmployeeManager : IEmployeeService
     {
-        private IEmployeeDal _employeeDal;
+        private readonly IEmployeeDal _employeeDal;
 
         public EmployeeManager(IEmployeeDal employeeDal)
         {

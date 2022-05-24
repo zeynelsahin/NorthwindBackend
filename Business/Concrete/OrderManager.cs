@@ -6,7 +6,6 @@ using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.DTOs;
 
@@ -14,9 +13,9 @@ namespace Business.Concrete
 {
     public class OrderManager : IOrderService
     {
-        private readonly IOrderDal _orderDal;
         private readonly ICustomerService _customerService;
         private readonly IEmployeeService _employeeService;
+        private readonly IOrderDal _orderDal;
 
         public OrderManager(IOrderDal orderDal, ICustomerService customerService, IEmployeeService employeeService)
         {
@@ -77,7 +76,7 @@ namespace Business.Concrete
             if (result.Count > 0) return result;
 
             _orderDal.Add(order);
-            return new List<IResult>() { new SuccessResult(Messages.OrderAdded) };
+            return new List<IResult> { new SuccessResult(Messages.OrderAdded) };
         }
 
         [CacheRemoveAspect("IOrderService.Get")]

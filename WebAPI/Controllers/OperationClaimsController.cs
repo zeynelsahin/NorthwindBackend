@@ -9,7 +9,7 @@ namespace WebAPI.Controllers;
 [ApiController]
 public class OperationClaimsController : Controller
 {
-    private IOperationClaimService _operationClaimService;
+    private readonly IOperationClaimService _operationClaimService;
 
     public OperationClaimsController(IOperationClaimService operationClaimService)
     {
